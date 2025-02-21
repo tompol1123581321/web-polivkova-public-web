@@ -1,0 +1,38 @@
+---
+import headImg from "../assets/imgs/person-photo-placeholder-woman-default-avatar-profile-icon-grey-photo-placeholder-female-no-photo-images-for-unfilled-user-profile-greyscale-illustration-for-social-media-free-vector.jpg";
+import { Image } from "astro:assets";
+---
+
+<main class="grid lg:grid-cols-2 place-items-center">
+  <div class="py-6 md:order-1 hidden md:block">
+    <Image
+      src={headImg}
+      alt="Motocyklový výcvik"
+      sizes="(max-width: 800px) 100vw, 620px"
+      class="rounded-md"
+      loading="eager"
+    />
+  </div>
+
+  <div>
+    <h1
+      class="text-4xl lg:text-5xl xl:text-6xl font-bold lg:tracking-tight xl:tracking-tighter"
+    >
+      Vítejte v účetnictví Ing. Jana Polívková
+    </h1>
+    <div class="flex flex-col gap-6 mt-8">
+      <h2 class="font-bold text-xl sm:text-2xl">
+        Profesionální účetní a daňové poradenství
+      </h2>
+
+      <p class="text-gray-700 dark:text-gray-300 text-lg mb-6">
+        Poskytujeme komplexní účetní a daňové služby pro malé i střední podniky
+        a jednotlivce. Díky moderním technologiím a individuálnímu přístupu
+        pečujeme o každý detail vašich financí, abyste se mohli soustředit na
+        růst vašeho podnikání. Neváhejte nás kontaktovat – ať už prostřednictvím
+        formuláře, telefonu nebo e-mailu – a domluvte si osobní schůzku, kde vám
+        rádi poradíme.
+      </p>
+    </div>
+  </div>
+</main>
