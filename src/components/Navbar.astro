@@ -118,7 +118,7 @@ if (pathname === "/") {
   document.querySelectorAll("#navbar a").forEach((link) => {
     link.addEventListener("click", () => {
       if (window.innerWidth < 640) {
-        setTimeout(closeMobileMenu, 800);
+        setTimeout(closeMobileMenu, 1000);
       }
     });
   });
