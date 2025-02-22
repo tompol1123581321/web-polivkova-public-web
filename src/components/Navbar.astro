@@ -63,7 +63,7 @@ if (pathname === "/") {
   </div>
   <nav
     id="navbar"
-    class="hidden -translate-y-[200%] transition-transform p-4 sm:block sm:translate-y-0 sm:static sm:p-0 w-full sm:w-auto text-sm lg:text-base"
+    class="absolute top-full left-0 right-0 bg-white/80 dark:bg-neutral-900/80 backdrop-blur transition-transform duration-300 ease-in-out origin-top transform scale-y-0 sm:static sm:scale-y-100 sm:transition-none p-4 sm:p-0 text-sm lg:text-base"
   >
     <ul
       class="flex flex-col items-center gap-4 lg:gap-6 border border-dashed border-gray-500 rounded-md font-semibold text-gray-500 p-4 sm:p-2 sm:border-none sm:bg-transparent sm:flex-row"
@@ -90,34 +90,38 @@ if (pathname === "/") {
   const navbarXIcon = document.getElementById("navbar-x-icon");
   const navbarMenuIcon = document.getElementById("navbar-menu-icon");
 
-  // Generalized function to close the mobile menu
+  // Smoothly collapse the mobile menu by scaling its Y axis.
   function closeMobileMenu() {
     if (window.innerWidth < 640) {
-      if (!navbar.classList.contains("hidden")) {
-        navbar.classList.add("hidden");
-        if (!navbar.classList.contains("-translate-y-[200%]")) {
-          navbar.classList.add("-translate-y-[200%]");
-        }
-        navbarXIcon.classList.add("hidden");
-        navbarMenuIcon.classList.remove("hidden");
-      }
+      navbar.classList.add("scale-y-0");
+      navbar.classList.remove("scale-y-100");
+      navbarXIcon.classList.add("hidden");
+      navbarMenuIcon.classList.remove("hidden");
     }
   }
 
   if (navbarToggle instanceof HTMLButtonElement) {
     navbarToggle.addEventListener("click", () => {
-      navbarXIcon.classList.toggle("hidden");
-      navbarMenuIcon.classList.toggle("hidden");
-      navbar.classList.toggle("hidden");
-      setTimeout(() => {
-        navbar.classList.toggle("-translate-y-[200%]");
-      }, 100);
+      if (window.innerWidth < 640) {
+        if (navbar.classList.contains("scale-y-0")) {
+          navbar.classList.remove("scale-y-0");
+          navbar.classList.add("scale-y-100");
+          navbarXIcon.classList.remove("hidden");
+          navbarMenuIcon.classList.add("hidden");
+        } else {
+          navbar.classList.remove("scale-y-100");
+          navbar.classList.add("scale-y-0");
+          navbarXIcon.classList.add("hidden");
+          navbarMenuIcon.classList.remove("hidden");
+        }
+      }
     });
   }
 
   document.querySelectorAll("#navbar a").forEach((link) => {
     link.addEventListener("click", () => {
       if (window.innerWidth < 640) {
+        // Delay closing the menu after a link click (adjust timing as needed)
         setTimeout(closeMobileMenu, 1500);
       }
     });
